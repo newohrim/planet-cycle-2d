@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://br37fox2sv645"]
+
+[ext_resource type="PackedScene" uid="uid://be17nt4mpyrg7" path="res://entities/player.tscn" id="1_2262g"]
+[ext_resource type="Texture2D" uid="uid://c6wsjvhyo56db" path="res://assets/sprites/background/stars.png" id="1_wdj6m"]
+[ext_resource type="Texture2D" uid="uid://jyx3g3vkkqp" path="res://icon.svg" id="3_l8qe7"]
+[ext_resource type="Script" uid="uid://edsa7hn0nv8a" path="res://scripts/components/player_camera_movement_component.gd" id="3_m1504"]
+[ext_resource type="Script" uid="uid://23fe0je0xtif" path="res://scripts/components/background_scroll_component.gd" id="4_ifaiv"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_2262g")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+script = ExtResource("3_m1504")
+move_speed = 1.5
+max_distance_pix_h = 200.0
+
+[node name="Background" type="Sprite2D" parent="Player/Camera2D"]
+z_index = -1
+texture_repeat = 2
+scale = Vector2(0.755, 0.755)
+texture = ExtResource("1_wdj6m")
+region_enabled = true
+region_rect = Rect2(0, 0, 1914.271, 1081.543)
+
+[node name="BackgroundScrollComponent" type="Node" parent="Player/Camera2D/Background" node_paths=PackedStringArray("target_background")]
+script = ExtResource("4_ifaiv")
+target_background = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(217, 3)
+texture = ExtResource("3_l8qe7")

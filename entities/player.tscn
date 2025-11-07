@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://be17nt4mpyrg7"]
+
+[ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
+[ext_resource type="Script" uid="uid://d0bb0ee77wahy" path="res://scripts/components/player_move_component.gd" id="2_b0kkn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
+radius = 47.042534
+
+[node name="Player" type="Area2D"]
+
+[node name="PlanetSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_merdl")
+
+[node name="PlanetShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.105)
+shape = SubResource("CircleShape2D_b0kkn")
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("2_b0kkn")
+move_speed = 300.0
+max_speed_px = 1.0
+move_threshold_pix = 20
