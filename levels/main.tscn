@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://br37fox2sv645"]
+[gd_scene load_steps=7 format=3 uid="uid://br37fox2sv645"]
 
 [ext_resource type="PackedScene" uid="uid://be17nt4mpyrg7" path="res://entities/player.tscn" id="1_2262g"]
 [ext_resource type="Texture2D" uid="uid://c6wsjvhyo56db" path="res://assets/sprites/background/stars.png" id="1_wdj6m"]
 [ext_resource type="Texture2D" uid="uid://jyx3g3vkkqp" path="res://icon.svg" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://edsa7hn0nv8a" path="res://scripts/components/player_camera_movement_component.gd" id="3_m1504"]
 [ext_resource type="Script" uid="uid://23fe0je0xtif" path="res://scripts/components/background_scroll_component.gd" id="4_ifaiv"]
+[ext_resource type="PackedScene" uid="uid://66qjc3bhf4h5" path="res://entities/moon.tscn" id="5_5k4jt"]
 
 [node name="Root" type="Node2D"]
 
@@ -30,3 +31,15 @@ target_background = NodePath("..")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(217, 3)
 texture = ExtResource("3_l8qe7")
+
+[node name="Moon" parent="." instance=ExtResource("5_5k4jt")]
+position = Vector2(-416, -6)
+
+[node name="Moon2" parent="." instance=ExtResource("5_5k4jt")]
+position = Vector2(-253, -204)
+
+[node name="Moon3" parent="." instance=ExtResource("5_5k4jt")]
+position = Vector2(200, -223)
+
+[node name="Moon4" parent="." instance=ExtResource("5_5k4jt")]
+position = Vector2(-248, 244)

@@ -13,5 +13,4 @@ func _process(delta: float) -> void:
 	if !camera:
 		return
 	var camera_pos = camera.get_global_transform().origin# + camera.offset
-	print(target_background.region_rect.position)
 	target_background.region_rect.position = camera_pos

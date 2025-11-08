@@ -15,6 +15,16 @@ run/main_scene="uid://br37fox2sv645"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[global_group]
+
+orbitable=""
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="PlayerGravityField"
+2d_physics/layer_3="Orbitables"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
