@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 	
 	var owner_2d = owner as Node2D
 	owner_2d.position = _get_orbital_pos()
-	print(owner_2d.position)
 	
 func _get_orbital_pos() -> Vector2:
 	var offset = Vector2(cos(cur_angle), sin(cur_angle))

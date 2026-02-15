@@ -8,15 +8,17 @@ var position_provider : PositionProviderBase
 @export
 var scene_provider : SceneProvider
 @export
+var amount_provider : SpawnAmountProviderBase
+@export
 var min_nodes_num : int = 5
 
 var spawned_nodes : Array[Node2D]
 
 func _ready() -> void:
-	assert(pivot and position_provider)
+	assert(pivot and position_provider and scene_provider and amount_provider)
 	
 func _process_spawn() -> void:
-	var attempts_num = min_nodes_num - spawned_nodes.size()
+	var attempts_num = amount_provider.get_spawn_amount(spawned_nodes.size())
 	for i in range(attempts_num):
 		_spawn_node()
 		

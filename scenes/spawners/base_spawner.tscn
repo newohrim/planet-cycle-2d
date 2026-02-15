@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3jtfmm3uyo6o"]
+
+[ext_resource type="Script" uid="uid://br3grojgb8jid" path="res://scripts/nodes/spawners/scene_provider.gd" id="1_51vj1"]
+[ext_resource type="Script" uid="uid://beduifjx5b8bq" path="res://scripts/nodes/spawners/scrolling_spawner.gd" id="1_xfqsx"]
+[ext_resource type="Script" uid="uid://buhg83bk27igf" path="res://scripts/nodes/spawners/position_provider_rect.gd" id="2_51vj1"]
+[ext_resource type="Script" uid="uid://dt4o0ovbmfi1f" path="res://scripts/nodes/spawners/spawn_amount_provider_constant.gd" id="4_v1mds"]
+
+[node name="BaseSpawner" type="Node" node_paths=PackedStringArray("position_provider", "scene_provider", "amount_provider")]
+script = ExtResource("1_xfqsx")
+position_provider = NodePath("PositionProvider")
+scene_provider = NodePath("SceneProvider")
+amount_provider = NodePath("AmountProvider")
+
+[node name="SceneProvider" type="Node" parent="."]
+script = ExtResource("1_51vj1")
+
+[node name="PositionProvider" type="Node" parent="."]
+script = ExtResource("2_51vj1")
+half_width = 2000.0
+half_height = 2000.0
+
+[node name="AmountProvider" type="Node" parent="."]
+script = ExtResource("4_v1mds")
+
+[node name="SpawnPeriodTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnPeriodTimer" to="." method="_process_spawn"]

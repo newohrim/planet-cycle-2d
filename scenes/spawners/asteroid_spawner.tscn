@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bec7qqefqmqh5"]
+
+[ext_resource type="PackedScene" uid="uid://b3jtfmm3uyo6o" path="res://scenes/spawners/base_spawner.tscn" id="1_rte43"]
+[ext_resource type="Script" uid="uid://ubwqw6j57tfb" path="res://scripts/nodes/spawners/position_provider_on_circle.gd" id="2_61w2t"]
+[ext_resource type="PackedScene" uid="uid://dc5fu62hds7dd" path="res://scenes/entities/asteroid.tscn" id="2_i4yy1"]
+[ext_resource type="Script" uid="uid://bqv5i2k0hv3t2" path="res://scripts/nodes/misc/random_timer.gd" id="4_hc4iq"]
+
+[node name="AsteroidSpawner" instance=ExtResource("1_rte43")]
+
+[node name="SceneProvider" parent="." index="0"]
+scenes = Array[PackedScene]([ExtResource("2_i4yy1")])
+
+[node name="PositionProvider" parent="." index="1"]
+script = ExtResource("2_61w2t")
+radius = 2500.0
+
+[node name="SpawnPeriodTimer" parent="." index="3"]
+autostart = false
+script = ExtResource("4_hc4iq")
+min_period = 0.2
+max_period = 1.0
