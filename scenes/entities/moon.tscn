@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://66qjc3bhf4h5"]
+[gd_scene load_steps=6 format=3 uid="uid://66qjc3bhf4h5"]
 
 [ext_resource type="Script" uid="uid://b067wr52gh0pn" path="res://scripts/nodes/orbitable_area_2d.gd" id="1_arc8c"]
 [ext_resource type="Texture2D" uid="uid://uq0m5yq34qv2" path="res://assets/sprites/moons/Moon1.png" id="1_slxk6"]
 [ext_resource type="Script" uid="uid://yn0xi8afng5w" path="res://scripts/components/orbit_move_component.gd" id="2_slxk6"]
+[ext_resource type="Script" uid="uid://bcw0wxwfbp4eq" path="res://scripts/components/destroy_when_far_away.gd" id="4_upsjo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 34.222378
@@ -25,3 +26,6 @@ shape = SubResource("CircleShape2D_b0kkn")
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("2_slxk6")
 move_speed = -3.5
+
+[node name="DestroyWhenFarAway" type="Node" parent="."]
+script = ExtResource("4_upsjo")

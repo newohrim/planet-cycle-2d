@@ -15,6 +15,10 @@ run/main_scene="uid://br37fox2sv645"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ProjectGlobals="*res://scenes/singletones/project_globals.tscn"
+
 [global_group]
 
 orbitable=""
