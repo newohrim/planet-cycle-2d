@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3jtfmm3uyo6o"]
+
+[ext_resource type="Script" uid="uid://br3grojgb8jid" path="res://scripts/nodes/spawners/scene_provider.gd" id="1_51vj1"]
+[ext_resource type="Script" uid="uid://beduifjx5b8bq" path="res://scripts/nodes/spawners/scrolling_spawner.gd" id="1_xfqsx"]
+[ext_resource type="Script" uid="uid://buhg83bk27igf" path="res://scripts/nodes/spawners/position_provider_rect.gd" id="2_51vj1"]
+[ext_resource type="PackedScene" uid="uid://66qjc3bhf4h5" path="res://scenes/entities/moon.tscn" id="2_lk6p4"]
+
+[node name="MoonSpawner" type="Node" node_paths=PackedStringArray("position_provider", "scene_provider")]
+script = ExtResource("1_xfqsx")
+position_provider = NodePath("PositionProvider")
+scene_provider = NodePath("SceneProvider")
+
+[node name="SceneProvider" type="Node" parent="."]
+script = ExtResource("1_51vj1")
+scenes = Array[PackedScene]([ExtResource("2_lk6p4")])
+
+[node name="PositionProvider" type="Node" parent="."]
+script = ExtResource("2_51vj1")
+half_width = 2000.0
+half_height = 2000.0
+
+[node name="SpawnPeriodTimer" type="Timer" parent="."]
+autostart = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="SpawnPeriodTimer" to="." method="_process_spawn"]

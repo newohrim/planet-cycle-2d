@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://br37fox2sv645"]
+[gd_scene load_steps=8 format=3 uid="uid://br37fox2sv645"]
 
 [ext_resource type="PackedScene" uid="uid://be17nt4mpyrg7" path="res://scenes/entities/player.tscn" id="1_b6bv0"]
+[ext_resource type="PackedScene" uid="uid://b3jtfmm3uyo6o" path="res://scenes/spawners/moon_spawner.tscn" id="1_ubwgw"]
 [ext_resource type="Script" uid="uid://edsa7hn0nv8a" path="res://scripts/components/player_camera_movement_component.gd" id="2_ubwgw"]
 [ext_resource type="Texture2D" uid="uid://c6wsjvhyo56db" path="res://assets/sprites/background/stars.png" id="3_vkq25"]
 [ext_resource type="Script" uid="uid://23fe0je0xtif" path="res://scripts/components/background_scroll_component.gd" id="4_7lrji"]
@@ -8,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://66qjc3bhf4h5" path="res://scenes/entities/moon.tscn" id="6_hwp66"]
 
 [node name="Root" type="Node2D"]
+
+[node name="MoonSpawner" parent="." node_paths=PackedStringArray("pivot") instance=ExtResource("1_ubwgw")]
+pivot = NodePath("../Player")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_b6bv0")]
 
