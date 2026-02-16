@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=8 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
+[ext_resource type="Script" uid="uid://cy474xqj3n7ac" path="res://scripts/components/hit_box_component.gd" id="2_42nxq"]
 [ext_resource type="Script" uid="uid://d0bb0ee77wahy" path="res://scripts/components/player_move_component.gd" id="2_b0kkn"]
 [ext_resource type="Script" uid="uid://dvv144haohx4p" path="res://scripts/nodes/gravity_area_2d.gd" id="3_e4p34"]
+[ext_resource type="Script" uid="uid://coe4ntekc4ulp" path="res://scripts/components/health_component.gd" id="5_5u6hq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 47.042534
@@ -10,21 +12,19 @@ radius = 47.042534
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfe5m"]
 radius = 172.01163
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Node2D"]
 
 [node name="PlanetSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_merdl")
 
-[node name="PlanetShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2_42nxq")
+metadata/_custom_type_script = "uid://cxglcklwwfp6r"
+
+[node name="HitboxShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 1.105)
 shape = SubResource("CircleShape2D_b0kkn")
-
-[node name="MoveComponent" type="Node" parent="."]
-script = ExtResource("2_b0kkn")
-move_speed = 300.0
-max_speed_px = 1.0
-move_threshold_pix = 20
 
 [node name="GravityArea2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -36,4 +36,15 @@ orbit_radius = 100.0
 shape = SubResource("CircleShape2D_rfe5m")
 debug_color = Color(0.57679063, 0.5517666, 0.12584257, 0.41960785)
 
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("2_b0kkn")
+move_speed = 300.0
+max_speed_px = 1.0
+move_threshold_pix = 20
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_5u6hq")
+metadata/_custom_type_script = "uid://coe4ntekc4ulp"
+
+[connection signal="damage_received" from="HitBox" to="HealthComponent" method="apply_damage"]
 [connection signal="area_entered" from="GravityArea2D" to="GravityArea2D" method="_on_area_entered"]
