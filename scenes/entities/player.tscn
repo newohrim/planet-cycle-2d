@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=11 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
 [ext_resource type="Script" uid="uid://cy474xqj3n7ac" path="res://scripts/components/hit_box_component.gd" id="2_42nxq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://coe4ntekc4ulp" path="res://scripts/components/health_component.gd" id="5_5u6hq"]
 [ext_resource type="Texture2D" uid="uid://bmhms28nplbi0" path="res://assets/sprites/misc/circle.png" id="6_d4qa6"]
 [ext_resource type="Script" uid="uid://bfrwfuso3cg4" path="res://scripts/nodes/ui/health_bar.gd" id="7_ss7kx"]
+[ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/damage_blink_sprite.gd" id="8_dnykm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 47.042534
@@ -25,6 +26,7 @@ script = ExtResource("2_42nxq")
 metadata/_custom_type_script = "uid://cxglcklwwfp6r"
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
 position = Vector2(0, 1.105)
 shape = SubResource("CircleShape2D_b0kkn")
 
@@ -35,6 +37,7 @@ script = ExtResource("3_e4p34")
 orbit_radius = 100.0
 
 [node name="GravityShape2D" type="CollisionShape2D" parent="GravityArea2D"]
+visible = false
 shape = SubResource("CircleShape2D_rfe5m")
 debug_color = Color(0.57679063, 0.5517666, 0.12584257, 0.41960785)
 
@@ -68,6 +71,16 @@ fill_mode = 5
 texture_progress = ExtResource("6_d4qa6")
 script = ExtResource("7_ss7kx")
 
+[node name="DamageBlinkSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+scale = Vector2(0.191, 0.191)
+texture = ExtResource("6_d4qa6")
+script = ExtResource("8_dnykm")
+damage_color = Color(0.16206557, 0.1620656, 0.16206557, 0.21568628)
+blink_half_duration = 0.2
+
 [connection signal="damage_received" from="HitBox" to="HealthComponent" method="apply_damage"]
 [connection signal="area_entered" from="GravityArea2D" to="GravityArea2D" method="_on_area_entered"]
-[connection signal="on_health_changed" from="HealthComponent" to="HealthBar" method="on_health_changed"]
+[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="on_health_changed"]
+[connection signal="health_changed" from="HealthComponent" to="DamageBlinkSprite" method="on_health_changed"]
