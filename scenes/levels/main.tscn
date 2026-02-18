@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://br37fox2sv645"]
+[gd_scene load_steps=9 format=3 uid="uid://br37fox2sv645"]
 
 [ext_resource type="PackedScene" uid="uid://be17nt4mpyrg7" path="res://scenes/entities/player.tscn" id="1_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://0q4ejkfrux1r" path="res://scenes/spawners/moon_spawner.tscn" id="1_ubwgw"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://23fe0je0xtif" path="res://scripts/components/background_scroll_component.gd" id="4_7lrji"]
 [ext_resource type="Texture2D" uid="uid://jyx3g3vkkqp" path="res://icon.svg" id="5_rssyh"]
 [ext_resource type="PackedScene" uid="uid://66qjc3bhf4h5" path="res://scenes/entities/moon.tscn" id="6_hwp66"]
-[ext_resource type="PackedScene" uid="uid://dc5fu62hds7dd" path="res://scenes/entities/asteroid.tscn" id="9_7lrji"]
 
 [node name="Root" type="Node2D"]
 
@@ -52,6 +51,3 @@ position = Vector2(200, -223)
 
 [node name="Moon4" parent="." instance=ExtResource("6_hwp66")]
 position = Vector2(-248, 244)
-
-[node name="Asteroid" parent="." instance=ExtResource("9_7lrji")]
-position = Vector2(-58, -210)

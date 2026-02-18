@@ -1,6 +1,8 @@
 class_name HealthComponent
 extends Node
 
+signal on_health_changed(health : float, delta : float)
+
 @export
 var start_health : float = 100.0
 
@@ -8,6 +10,8 @@ var start_health : float = 100.0
 var health : float = start_health
 
 func apply_damage(_from : Node, damage : float) -> void:
+	if health == 0.0:
+		return
 	assert(damage >= 0.0, "received negative damage")
 	health = max(health - damage, 0)
-	print("health: " + str(health))
+	on_health_changed.emit(health, -damage)
