@@ -8,21 +8,16 @@ var orbited_bodies : Array[Node2D]
 
 func _ready() -> void:
 	orbited_bodies.resize(max_bodies_on_orbit)
-
-func _on_area_entered(body: Area2D) -> void:
-	if not body.is_in_group("orbitable"):
-		return
 	
-	var free_idx = _find_free_slot()
-	if free_idx < 0:
-		return
+func find_free_slot() -> int:
+	return orbited_bodies.find_custom(func(body): return body == null)
 	
-	orbited_bodies[free_idx] = body
+func make_orbit(body : Node2D, idx : int) -> float:
+	assert(idx >= 0 and idx < max_bodies_on_orbit and orbited_bodies[idx] == null)
+	
+	orbited_bodies[idx] = body
 	body.tree_exiting.connect(_remove_from_orbit.bind(body))
-	body.make_orbit(self, orbit_radius * (free_idx + 1))
-	
-func _find_free_slot() -> int:
-	return orbited_bodies.find_custom(func(body): return not is_instance_valid(body))
+	return orbit_radius * (idx + 1)
 
 func _remove_from_orbit(body: Node2D) -> void:
 	var idx = orbited_bodies.find(body)

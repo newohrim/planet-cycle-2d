@@ -1,3 +1,3 @@
 extends Node
 
-@export var view_distance = 2500
+@export var view_distance : float = 2500.0
