@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=12 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
 [ext_resource type="Script" uid="uid://cy474xqj3n7ac" path="res://scripts/components/hit_box_component.gd" id="2_42nxq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bmhms28nplbi0" path="res://assets/sprites/misc/circle.png" id="6_d4qa6"]
 [ext_resource type="Script" uid="uid://bfrwfuso3cg4" path="res://scripts/nodes/ui/health_bar.gd" id="7_ss7kx"]
 [ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/damage_blink_sprite.gd" id="8_dnykm"]
+[ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="9_c5rqy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 47.042534
@@ -23,7 +24,6 @@ texture = ExtResource("1_merdl")
 
 [node name="HitBox" type="Area2D" parent="."]
 script = ExtResource("2_42nxq")
-metadata/_custom_type_script = "uid://cxglcklwwfp6r"
 
 [node name="HitboxShape2D" type="CollisionShape2D" parent="HitBox"]
 visible = false
@@ -71,14 +71,19 @@ fill_mode = 5
 texture_progress = ExtResource("6_d4qa6")
 script = ExtResource("7_ss7kx")
 
-[node name="DamageBlinkSprite" type="Sprite2D" parent="."]
+[node name="DamageBlinkSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("tween_blinker")]
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 scale = Vector2(0.191, 0.191)
 texture = ExtResource("6_d4qa6")
 script = ExtResource("8_dnykm")
-damage_color = Color(0.16206557, 0.1620656, 0.16206557, 0.21568628)
+tween_blinker = NodePath("TweenBlinker")
+
+[node name="TweenBlinker" type="Node" parent="DamageBlinkSprite"]
+script = ExtResource("9_c5rqy")
 blink_half_duration = 0.2
+target_color = Color(0.16078432, 0.16078432, 0.16078432, 0.21568628)
+metadata/_custom_type_script = "uid://b15oivhgowff1"
 
 [connection signal="damage_received" from="HitBox" to="HealthComponent" method="apply_damage"]
 [connection signal="area_entered" from="GravityArea2D" to="GravityArea2D" method="_on_area_entered"]

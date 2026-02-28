@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://66qjc3bhf4h5"]
+[gd_scene load_steps=11 format=3 uid="uid://66qjc3bhf4h5"]
 
 [ext_resource type="Texture2D" uid="uid://uq0m5yq34qv2" path="res://assets/sprites/moons/Moon1.png" id="1_slxk6"]
 [ext_resource type="Script" uid="uid://yn0xi8afng5w" path="res://scripts/components/orbit_move_component.gd" id="2_slxk6"]
 [ext_resource type="Texture2D" uid="uid://dthh6jd5065r7" path="res://assets/sprites/ui/bonusCounter.png" id="3_eqogm"]
+[ext_resource type="Script" uid="uid://dq72yf31jp351" path="res://scripts/nodes/moon_area.gd" id="4_168iw"]
+[ext_resource type="Script" uid="uid://bonqmajce3op0" path="res://scripts/nodes/ui/power_counter_bar.gd" id="4_n3srg"]
 [ext_resource type="Texture2D" uid="uid://bi4fuaxag0pv0" path="res://assets/sprites/ui/bonusCounterMask.png" id="4_q645q"]
 [ext_resource type="Script" uid="uid://bcw0wxwfbp4eq" path="res://scripts/components/destroy_when_far_away.gd" id="4_upsjo"]
+[ext_resource type="Script" uid="uid://cilxnmihkq60e" path="res://scripts/components/power_component.gd" id="5_eqogm"]
+[ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="5_n3srg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 34.222378
@@ -18,7 +22,7 @@ texture = ExtResource("1_slxk6")
 [node name="PowerCounterNode" type="Node2D" parent="."]
 scale = Vector2(0.08, 0.08)
 
-[node name="PowerCounterBar" type="TextureProgressBar" parent="PowerCounterNode"]
+[node name="PowerCounterBar" type="TextureProgressBar" parent="PowerCounterNode" node_paths=PackedStringArray("tween_blinker")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -36,10 +40,20 @@ fill_mode = 3
 texture_under = ExtResource("3_eqogm")
 texture_progress = ExtResource("4_q645q")
 tint_progress = Color(1, 1, 0.21568628, 1)
+script = ExtResource("4_n3srg")
+tween_blinker = NodePath("../TweenBlinker")
 
-[node name="MoonArea" type="Area2D" parent="." groups=["orbitable"]]
+[node name="TweenBlinker" type="Node" parent="PowerCounterNode"]
+script = ExtResource("5_n3srg")
+loop = true
+blink_half_duration = 0.2
+target_color = Color(0.16078432, 0.16078432, 0.16078432, 0.21568628)
+metadata/_custom_type_script = "uid://b15oivhgowff1"
+
+[node name="MoonArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 10
+script = ExtResource("4_168iw")
 
 [node name="MoonShape" type="CollisionShape2D" parent="MoonArea"]
 position = Vector2(0, 1.105)
@@ -50,7 +64,12 @@ shape = SubResource("CircleShape2D_b0kkn")
 script = ExtResource("2_slxk6")
 move_speed = -3.5
 
+[node name="PowerComponent" type="Node" parent="."]
+script = ExtResource("5_eqogm")
+
 [node name="DestroyWhenFarAway" type="Node" parent="."]
 script = ExtResource("4_upsjo")
 
 [connection signal="area_entered" from="MoonArea" to="MoveComponent" method="_on_area_entered"]
+[connection signal="power_received" from="MoonArea" to="PowerComponent" method="add_power_from_node"]
+[connection signal="power_received" from="PowerComponent" to="PowerCounterNode/PowerCounterBar" method="_on_power_received"]

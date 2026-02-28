@@ -5,7 +5,7 @@ extends Node2D
 var move_comp : ConstantMoveComponent = %MoveComponent
 
 @onready
-var deal_damage_area : DealDamageArea2D = %DealDamageArea
+var asteroid_area : Area2D = %AsteroidArea
 
 func _ready() -> void:
 	var player = get_tree().get_first_node_in_group("player")
@@ -14,4 +14,4 @@ func _ready() -> void:
 		return
 	
 	move_comp.move_vector = position.direction_to((player as Node2D).position)
-	deal_damage_area.area_entered.connect(func(_area): queue_free())
+	asteroid_area.area_entered.connect(func(_area): queue_free())

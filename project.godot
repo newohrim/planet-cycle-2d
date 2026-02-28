@@ -19,10 +19,6 @@ config/icon="res://icon.svg"
 
 ProjectGlobals="*res://scenes/singletones/project_globals.tscn"
 
-[global_group]
-
-orbitable=""
-
 [layer_names]
 
 2d_physics/layer_1="Player"
