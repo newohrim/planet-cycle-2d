@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo8x1o005v6yd"]
+
+[ext_resource type="Script" uid="uid://dxv6hy6ypg3hh" path="res://scripts/bonuses/bonus_base.gd" id="1_0h44m"]
+
+[node name="BonusBase" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_0h44m")
+timer = NodePath("Timer")
+metadata/_custom_type_script = "uid://dxv6hy6ypg3hh"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

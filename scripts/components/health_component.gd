@@ -10,7 +10,7 @@ var start_health : float = 100.0
 var health : float = start_health
 
 func apply_damage(_from : Node, damage : float) -> void:
-	if health == 0.0:
+	if health == 0.0 or ProjectGlobals.player_state.is_invulnerable():
 		return
 	assert(damage >= 0.0, "received negative damage")
 	health = max(health - damage, 0)

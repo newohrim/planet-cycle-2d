@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://66qjc3bhf4h5"]
+[gd_scene load_steps=14 format=3 uid="uid://66qjc3bhf4h5"]
 
+[ext_resource type="Script" uid="uid://bc5tmycvovwqq" path="res://scripts/nodes/entities/moon.gd" id="1_k52mt"]
 [ext_resource type="Texture2D" uid="uid://uq0m5yq34qv2" path="res://assets/sprites/moons/Moon1.png" id="1_slxk6"]
 [ext_resource type="Script" uid="uid://yn0xi8afng5w" path="res://scripts/components/orbit_move_component.gd" id="2_slxk6"]
 [ext_resource type="Texture2D" uid="uid://dthh6jd5065r7" path="res://assets/sprites/ui/bonusCounter.png" id="3_eqogm"]
@@ -9,11 +10,14 @@
 [ext_resource type="Script" uid="uid://bcw0wxwfbp4eq" path="res://scripts/components/destroy_when_far_away.gd" id="4_upsjo"]
 [ext_resource type="Script" uid="uid://cilxnmihkq60e" path="res://scripts/components/power_component.gd" id="5_eqogm"]
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="5_n3srg"]
+[ext_resource type="Script" uid="uid://bvtd5mjvjwc4" path="res://scripts/bonuses/bonus_provider.gd" id="9_dwiev"]
+[ext_resource type="PackedScene" uid="uid://bp8f5l133egll" path="res://scenes/bonuses/bonus_invulnerable.tscn" id="10_k52mt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 34.222378
 
 [node name="Moon" type="Node2D"]
+script = ExtResource("1_k52mt")
 
 [node name="PlanetSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.13, 0.13)
@@ -65,7 +69,14 @@ script = ExtResource("2_slxk6")
 move_speed = -3.5
 
 [node name="PowerComponent" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("5_eqogm")
+
+[node name="BonusProvider" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_dwiev")
+bonusScene = ExtResource("10_k52mt")
+metadata/_custom_type_script = "uid://bvtd5mjvjwc4"
 
 [node name="DestroyWhenFarAway" type="Node" parent="."]
 script = ExtResource("4_upsjo")

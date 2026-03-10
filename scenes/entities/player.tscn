@@ -1,14 +1,41 @@
-[gd_scene load_steps=12 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=20 format=3 uid="uid://be17nt4mpyrg7"]
 
+[ext_resource type="Script" uid="uid://cd67m2wea8q23" path="res://scripts/nodes/entities/player.gd" id="1_73kkf"]
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
 [ext_resource type="Script" uid="uid://cy474xqj3n7ac" path="res://scripts/components/hit_box_component.gd" id="2_42nxq"]
 [ext_resource type="Script" uid="uid://d0bb0ee77wahy" path="res://scripts/components/player_move_component.gd" id="2_b0kkn"]
 [ext_resource type="Script" uid="uid://dvv144haohx4p" path="res://scripts/nodes/gravity_area_2d.gd" id="3_e4p34"]
+[ext_resource type="Texture2D" uid="uid://bk4k7awcl7a4k" path="res://assets/sprites/bonus_effects/pl_border_1.png" id="3_ogpgs"]
+[ext_resource type="Texture2D" uid="uid://sijpdk8tqpep" path="res://assets/sprites/bonus_effects/pl_border_2.png" id="4_spk56"]
+[ext_resource type="Texture2D" uid="uid://bd1u2try3n7bu" path="res://assets/sprites/bonus_effects/pl_border_3.png" id="5_1yk18"]
 [ext_resource type="Script" uid="uid://coe4ntekc4ulp" path="res://scripts/components/health_component.gd" id="5_5u6hq"]
+[ext_resource type="Script" uid="uid://cjqm1vro0xfjy" path="res://scripts/bonuses/bonuses_holder.gd" id="5_b6tgf"]
+[ext_resource type="Texture2D" uid="uid://bgiohv1xjlsok" path="res://assets/sprites/bonus_effects/pl_border_4.png" id="6_b4o2o"]
 [ext_resource type="Texture2D" uid="uid://bmhms28nplbi0" path="res://assets/sprites/misc/circle.png" id="6_d4qa6"]
+[ext_resource type="Script" uid="uid://de3i521ld0qsx" path="res://scripts/nodes/ui/bonus_effect_sprite.gd" id="7_spk56"]
 [ext_resource type="Script" uid="uid://bfrwfuso3cg4" path="res://scripts/nodes/ui/health_bar.gd" id="7_ss7kx"]
 [ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/damage_blink_sprite.gd" id="8_dnykm"]
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="9_c5rqy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73kkf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ogpgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_spk56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1yk18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b4o2o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 47.042534
@@ -17,10 +44,20 @@ radius = 47.042534
 radius = 172.01163
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_73kkf")
 
 [node name="PlanetSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_merdl")
+
+[node name="BonusEffectSprite" type="AnimatedSprite2D" parent="PlanetSprite"]
+visible = false
+position = Vector2(0, 16.285)
+sprite_frames = SubResource("SpriteFrames_73kkf")
+autoplay = "default"
+frame = 1
+frame_progress = 0.7686041
+script = ExtResource("7_spk56")
 
 [node name="HitBox" type="Area2D" parent="."]
 script = ExtResource("2_42nxq")
@@ -31,6 +68,7 @@ position = Vector2(0, 1.105)
 shape = SubResource("CircleShape2D_b0kkn")
 
 [node name="GravityArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("3_e4p34")
@@ -46,6 +84,11 @@ script = ExtResource("2_b0kkn")
 move_speed = 300.0
 max_speed_px = 1.0
 move_threshold_pix = 20
+
+[node name="BonusesHolder" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_b6tgf")
+metadata/_custom_type_script = "uid://cjqm1vro0xfjy"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_5u6hq")
