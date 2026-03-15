@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://p1sro2dj74bq"]
+
+[ext_resource type="PackedScene" uid="uid://b61p68o1ltjth" path="res://scenes/entities/moon_base.tscn" id="1_e5j1w"]
+[ext_resource type="PackedScene" uid="uid://bp8f5l133egll" path="res://scenes/bonuses/bonus_invulnerable.tscn" id="3_5ji3k"]
+
+[node name="MoonSimple" instance=ExtResource("1_e5j1w")]
+
+[node name="BonusProvider" parent="." index="4"]
+bonusScene = ExtResource("3_5ji3k")

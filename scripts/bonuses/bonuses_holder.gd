@@ -7,7 +7,7 @@ var active_bonuses : Array[BonusBase]
 
 func add_bonus(bonus : BonusBase) -> void:
 	var idx = active_bonuses.find_custom(
-		func(other : BonusBase): return typeof(other) == typeof(bonus)
+		func(other : BonusBase): return other.is_same_bonus_type(bonus)
 	)
 	if idx >= 0:
 		active_bonuses[idx].bonus_sum(bonus)

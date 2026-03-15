@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://8168qfbfq2o8"]
+
+[ext_resource type="PackedScene" uid="uid://b61p68o1ltjth" path="res://scenes/entities/moon_base.tscn" id="1_nyv13"]
+[ext_resource type="Texture2D" uid="uid://btat08pqy0el7" path="res://assets/sprites/moons/MoonHealing.png" id="2_2ra0j"]
+[ext_resource type="PackedScene" uid="uid://c5hswc23ogbeo" path="res://scenes/bonuses/bonus_healing.tscn" id="3_rhket"]
+
+[node name="MoonHealing" instance=ExtResource("1_nyv13")]
+
+[node name="PlanetSprite" parent="." index="0"]
+scale = Vector2(0.155, 0.155)
+texture = ExtResource("2_2ra0j")
+
+[node name="PowerCounterBar" parent="PowerCounterNode" index="0"]
+tint_progress = Color(0.21176471, 0.74509805, 0.21568628, 1)
+
+[node name="TweenBlinker" parent="PowerCounterNode" index="1"]
+target_color = Color(0.21176471, 0.93333334, 0.21568628, 1)
+
+[node name="BonusProvider" parent="." index="4"]
+bonusScene = ExtResource("3_rhket")

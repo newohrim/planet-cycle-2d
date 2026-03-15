@@ -6,6 +6,9 @@ signal bonus_ended()
 @export
 var timer : Timer
 
+func is_same_bonus_type(_other : BonusBase) -> bool:
+	return false
+
 func bonus_begin() -> void:
 	pass
 

@@ -6,6 +6,8 @@ signal state_changed(state_flag : PLAYER_STATE_E, value : bool)
 enum PLAYER_STATE_E {
 	IS_DEAD = 1 << 0,
 	IS_INVULNERABLE = 1 << 1,
+	IS_HEALING = 1 << 2,
+	IS_IGNORE_DAMAGE = 1 << 3,
 	
 	DEFAULT = 0
 }
@@ -17,6 +19,12 @@ func is_alive() -> bool:
 	
 func is_invulnerable() -> bool:
 	return _is_bit_set(PLAYER_STATE_E.IS_INVULNERABLE)
+	
+func is_healing() -> bool:
+	return _is_bit_set(PLAYER_STATE_E.IS_HEALING)
+	
+func is_ignore_damage() -> bool:
+	return _is_bit_set(PLAYER_STATE_E.IS_IGNORE_DAMAGE)
 
 func set_bit(bit : PLAYER_STATE_E) -> void:
 	assert(flags & bit == 0, str(bit) + " bit was already set")

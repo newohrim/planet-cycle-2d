@@ -12,9 +12,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		# TODO: make iterator?
 		for body in gravity_area.orbited_bodies:
 			# TODO: any better solution than actual type checking?
-			if (not body) or (not body is Moon):
+			if (not body) or (not body is MoonBase):
 				continue
-			var moon = body as Moon
+			var moon = body as MoonBase
 			if moon.is_powered():
 				var bonus = moon.extract_bonus()
 				bonuses_holder.add_bonus(bonus)  # activates bonus

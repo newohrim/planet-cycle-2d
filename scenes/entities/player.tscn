@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=21 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Script" uid="uid://cd67m2wea8q23" path="res://scripts/nodes/entities/player.gd" id="1_73kkf"]
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bfrwfuso3cg4" path="res://scripts/nodes/ui/health_bar.gd" id="7_ss7kx"]
 [ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/damage_blink_sprite.gd" id="8_dnykm"]
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="9_c5rqy"]
+[ext_resource type="Script" uid="uid://df0r7nmfcmjdi" path="res://scripts/components/healer_component.gd" id="13_1yk18"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73kkf"]
 animations = [{
@@ -94,8 +95,13 @@ metadata/_custom_type_script = "uid://cjqm1vro0xfjy"
 script = ExtResource("5_5u6hq")
 metadata/_custom_type_script = "uid://coe4ntekc4ulp"
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-modulate = Color(1, 1, 1, 0.25882354)
+[node name="HealerComponent" type="Node" parent="." node_paths=PackedStringArray("target_health")]
+script = ExtResource("13_1yk18")
+heal_rate = 3.5
+target_health = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://df0r7nmfcmjdi"
+
+[node name="HealthBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("tween_blinker")]
 z_index = -1
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,7 +118,16 @@ scale = Vector2(0.2, 0.2)
 value = 100.0
 fill_mode = 5
 texture_progress = ExtResource("6_d4qa6")
+tint_progress = Color(1, 1, 1, 0.25882354)
 script = ExtResource("7_ss7kx")
+tween_blinker = NodePath("TweenBlinker")
+
+[node name="TweenBlinker" type="Node" parent="HealthBar"]
+script = ExtResource("9_c5rqy")
+loop = true
+blink_half_duration = 0.5
+target_color = Color(0, 1, 0, 0.25882354)
+metadata/_custom_type_script = "uid://b15oivhgowff1"
 
 [node name="DamageBlinkSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("tween_blinker")]
 modulate = Color(1, 1, 1, 0)

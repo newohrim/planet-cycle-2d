@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5hswc23ogbeo"]
+
+[ext_resource type="PackedScene" uid="uid://10cx1o5smjii" path="res://scenes/bonuses/bonus_generic.tscn" id="1_im8ak"]
+
+[node name="BonusHealing" instance=ExtResource("1_im8ak")]
+target_state = Array[int]([4])
+
+[node name="Timer" parent="." index="0"]
+wait_time = 10.0

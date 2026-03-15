@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://0q4ejkfrux1r"]
+[gd_scene load_steps=5 format=3 uid="uid://0q4ejkfrux1r"]
 
 [ext_resource type="PackedScene" uid="uid://b3jtfmm3uyo6o" path="res://scenes/spawners/base_spawner.tscn" id="1_xfqsx"]
-[ext_resource type="PackedScene" uid="uid://66qjc3bhf4h5" path="res://scenes/entities/moon.tscn" id="2_lk6p4"]
+[ext_resource type="PackedScene" uid="uid://p1sro2dj74bq" path="res://scenes/entities/moon_simple.tscn" id="2_lk6p4"]
+[ext_resource type="PackedScene" uid="uid://8168qfbfq2o8" path="res://scenes/entities/moon_healing.tscn" id="3_je0cr"]
 [ext_resource type="Script" uid="uid://j37d6dh7e1a" path="res://scripts/nodes/spawners/spawn_amount_provider_filling.gd" id="3_lk6p4"]
 
 [node name="MoonSpawner" instance=ExtResource("1_xfqsx")]
 
 [node name="SceneProvider" parent="." index="0"]
-scenes = Array[PackedScene]([ExtResource("2_lk6p4")])
+scenes = Array[PackedScene]([ExtResource("2_lk6p4"), ExtResource("3_je0cr")])
 
 [node name="AmountProvider" parent="." index="2"]
 script = ExtResource("3_lk6p4")
