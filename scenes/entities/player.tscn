@@ -51,7 +51,7 @@ script = ExtResource("1_73kkf")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_merdl")
 
-[node name="BonusEffectSprite" type="AnimatedSprite2D" parent="PlanetSprite"]
+[node name="BonusEffectSprite" type="AnimatedSprite2D" parent="PlanetSprite" node_paths=PackedStringArray("bonusesHolder", "timer")]
 visible = false
 position = Vector2(0, 16.285)
 sprite_frames = SubResource("SpriteFrames_73kkf")
@@ -59,6 +59,10 @@ autoplay = "default"
 frame = 1
 frame_progress = 0.7686041
 script = ExtResource("7_spk56")
+bonusesHolder = NodePath("../../BonusesHolder")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="PlanetSprite/BonusEffectSprite"]
 
 [node name="HitBox" type="Area2D" parent="."]
 script = ExtResource("2_42nxq")
