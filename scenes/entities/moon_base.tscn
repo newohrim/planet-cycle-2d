@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://bcw0wxwfbp4eq" path="res://scripts/components/destroy_when_far_away.gd" id="12_xjrq8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
-radius = 34.222378
+radius = 34.782757
 
 [node name="Moon" type="Node2D"]
 script = ExtResource("1_eftg1")

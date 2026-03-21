@@ -1,4 +1,4 @@
-class_name MoonSpawner
+class_name ScrollingSpawner
 extends Node
 
 @export 

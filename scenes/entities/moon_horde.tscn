@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxbl7q6215pu"]
+
+[ext_resource type="PackedScene" uid="uid://b61p68o1ltjth" path="res://scenes/entities/moon_base.tscn" id="1_wmdwf"]
+[ext_resource type="Texture2D" uid="uid://bfew5f1neg162" path="res://assets/sprites/moons/MoonHorde.png" id="2_u7rvc"]
+[ext_resource type="PackedScene" uid="uid://b8pbkk06eo3d2" path="res://scenes/bonuses/bonus_horde.tscn" id="3_wpjja"]
+
+[node name="MoonHorde" instance=ExtResource("1_wmdwf")]
+
+[node name="PlanetSprite" parent="." index="0"]
+position = Vector2(-0.2, 0.425)
+scale = Vector2(0.088, 0.088)
+texture = ExtResource("2_u7rvc")
+
+[node name="BonusProvider" parent="." index="4"]
+bonusScene = ExtResource("3_wpjja")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8pbkk06eo3d2"]
+
+[ext_resource type="PackedScene" uid="uid://10cx1o5smjii" path="res://scenes/bonuses/bonus_generic.tscn" id="1_bea18"]
+
+[node name="BonusHorde" instance=ExtResource("1_bea18")]
+target_state = Array[int]([16])
+
+[node name="Timer" parent="." index="0"]
+wait_time = 5.0

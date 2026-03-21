@@ -8,6 +8,7 @@ enum PLAYER_STATE_E {
 	IS_INVULNERABLE = 1 << 1,
 	IS_HEALING = 1 << 2,
 	IS_IGNORE_DAMAGE = 1 << 3,
+	IS_HORDE_MODE = 1 << 4,
 	
 	DEFAULT = 0
 }
