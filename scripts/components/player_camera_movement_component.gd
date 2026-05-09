@@ -19,6 +19,10 @@ func _ready() -> void:
 	max_distance_pix_v = max_distance_pix_h * aspect_ratio
 
 func _process(delta: float) -> void:
+	if not ProjectGlobals.player_state.is_alive():
+		process_mode = Node.PROCESS_MODE_DISABLED
+		return
+	
 	var new_target_offset = get_local_mouse_position()
 	if new_target_offset.length_squared() >= min_offset_pix_sq:
 		var bounds = Vector2(max_distance_pix_h, max_distance_pix_v)

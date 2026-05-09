@@ -14,6 +14,10 @@ func _ready() -> void:
 	target_pos = (owner as Node2D).position
 
 func _process(delta: float) -> void:
+	if not ProjectGlobals.player_state.is_alive():
+		process_mode = Node.PROCESS_MODE_DISABLED
+		return
+	
 	var owner_2d : Node2D = owner
 	
 	var camera = get_viewport().get_camera_2d() # Or any node with get_canvas_transform()

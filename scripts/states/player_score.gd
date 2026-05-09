@@ -7,11 +7,17 @@ var _best_score : int = 0
 
 signal score_changed(score : int)
 
+func get_score() -> int:
+	return _score
+
 func add_score(amount: int):
 	var new_score = max(0, _score + amount)
 	if new_score != _score:
 		_score = new_score
 		score_changed.emit(_score)
+		
+func get_best_score() -> int:
+	return _best_score
 		
 func update_best_score():
 	if _score > _best_score:

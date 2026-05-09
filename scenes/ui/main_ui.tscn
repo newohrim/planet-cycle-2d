@@ -1,11 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://df2h24wkr5sg8"]
+[gd_scene load_steps=11 format=3 uid="uid://df2h24wkr5sg8"]
 
 [ext_resource type="FontFile" uid="uid://cygy3jq60aafl" path="res://assets/fonts/a_lcdnovaobl_[allfont.ru].ttf" id="1_hnesk"]
 [ext_resource type="Script" uid="uid://blj6ji8tejoq8" path="res://scripts/nodes/ui/player_score_label.gd" id="2_hcnxy"]
+[ext_resource type="Script" uid="uid://5i5uyee6fmt5" path="res://scripts/nodes/ui/game_over_panel.gd" id="3_46cp5"]
+[ext_resource type="LabelSettings" uid="uid://crahimovqd0ic" path="res://assets/fonts/default_label_settings.tres" id="3_l8t6x"]
+[ext_resource type="FontFile" uid="uid://uhgx80hqom86" path="res://assets/fonts/BebasNeue Bold.otf" id="4_travt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hcnxy"]
 font = ExtResource("1_hnesk")
 font_size = 78
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcnxy"]
+bg_color = Color(0.16470589, 0.16470589, 0.19215687, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="Animation" id="Animation_46cp5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(382, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-400, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_travt"]
+resource_name = "show_game_over_panel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-400, -0.25, 0, 0.25, 0, 186.10773, -0.8666667, -1.607727, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1beo"]
+_data = {
+&"RESET": SubResource("Animation_46cp5"),
+&"show_game_over_panel": SubResource("Animation_travt")
+}
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -15,7 +82,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Score" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -29,3 +96,84 @@ text = "0"
 label_settings = SubResource("LabelSettings_hcnxy")
 horizontal_alignment = 2
 script = ExtResource("2_hcnxy")
+
+[node name="GameOverPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("anim_player", "score_label", "best_score_label")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -724.0
+offset_right = 194.0
+offset_bottom = -448.216
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hcnxy")
+script = ExtResource("3_46cp5")
+anim_player = NodePath("AnimationPlayer")
+score_label = NodePath("MarginContainer/vBoxTable/hBoxRow/ScoreLabelValue")
+best_score_label = NodePath("MarginContainer/vBoxTable/hBoxRow2/BestScoreLabelValue")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOverPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_b1beo")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="vBoxTable" type="VBoxContainer" parent="GameOverPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="hBoxRow" type="HBoxContainer" parent="GameOverPanel/MarginContainer/vBoxTable"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="GameOverPanel/MarginContainer/vBoxTable/hBoxRow"]
+layout_mode = 2
+text = "Score:"
+label_settings = ExtResource("3_l8t6x")
+
+[node name="ScoreLabelValue" type="Label" parent="GameOverPanel/MarginContainer/vBoxTable/hBoxRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("3_l8t6x")
+horizontal_alignment = 2
+
+[node name="hBoxRow2" type="HBoxContainer" parent="GameOverPanel/MarginContainer/vBoxTable"]
+layout_mode = 2
+
+[node name="BestScoreLabel" type="Label" parent="GameOverPanel/MarginContainer/vBoxTable/hBoxRow2"]
+layout_mode = 2
+text = "Best Score"
+label_settings = ExtResource("3_l8t6x")
+
+[node name="BestScoreLabelValue" type="Label" parent="GameOverPanel/MarginContainer/vBoxTable/hBoxRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("3_l8t6x")
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverPanel/MarginContainer/vBoxTable"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="Button" type="Button" parent="GameOverPanel/MarginContainer/vBoxTable/MarginContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_travt")
+theme_override_font_sizes/font_size = 48
+text = "Restart"
+
+[connection signal="pressed" from="GameOverPanel/MarginContainer/vBoxTable/MarginContainer/Button" to="GameOverPanel" method="_on_restart_button_clicked"]
