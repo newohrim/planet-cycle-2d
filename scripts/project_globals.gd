@@ -5,3 +5,6 @@ extends Node
 var player_state : PlayerState
 
 var player_score : PlayerScore
+
+func game_over():
+	get_tree().reload_current_scene()

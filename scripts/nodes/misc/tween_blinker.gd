@@ -38,7 +38,6 @@ func stop():
 		tween.kill()
 	if object:
 		assert(prop)
-		print(str(prop))
 		object.set(str(prop), initial_color)
 		object = null
 		prop = NodePath()

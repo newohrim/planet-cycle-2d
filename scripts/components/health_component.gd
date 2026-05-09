@@ -20,6 +20,9 @@ func apply_damage(_from : Node, damage : float) -> void:
 		return
 	health = new_health
 	health_changed.emit(health, -damage)
+	if health == 0.0:
+		ProjectGlobals.player_state.set_bit(PlayerState.PLAYER_STATE_E.IS_DEAD)
+		ProjectGlobals.game_over()
 	
 func apply_heal(_from : Node, heal : float) -> void:
 	if health == start_health or not ProjectGlobals.player_state.is_alive():
