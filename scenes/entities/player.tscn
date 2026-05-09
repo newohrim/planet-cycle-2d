@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=22 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Script" uid="uid://cd67m2wea8q23" path="res://scripts/nodes/entities/player.gd" id="1_73kkf"]
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
@@ -14,8 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://bmhms28nplbi0" path="res://assets/sprites/misc/circle.png" id="6_d4qa6"]
 [ext_resource type="Script" uid="uid://de3i521ld0qsx" path="res://scripts/nodes/ui/bonus_effect_sprite.gd" id="7_spk56"]
 [ext_resource type="Script" uid="uid://bfrwfuso3cg4" path="res://scripts/nodes/ui/health_bar.gd" id="7_ss7kx"]
-[ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/damage_blink_sprite.gd" id="8_dnykm"]
+[ext_resource type="Script" uid="uid://b1ljbsjhyepa8" path="res://scripts/nodes/ui/hit_blink_sprite.gd" id="8_dnykm"]
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="9_c5rqy"]
+[ext_resource type="Script" uid="uid://bfexhi5btk2xx" path="res://scripts/components/add_score_component.gd" id="12_b4o2o"]
 [ext_resource type="Script" uid="uid://df0r7nmfcmjdi" path="res://scripts/components/healer_component.gd" id="13_1yk18"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73kkf"]
@@ -95,6 +96,10 @@ unique_name_in_owner = true
 script = ExtResource("5_b6tgf")
 metadata/_custom_type_script = "uid://cjqm1vro0xfjy"
 
+[node name="AddScoreComponent" type="Node" parent="."]
+script = ExtResource("12_b4o2o")
+metadata/_custom_type_script = "uid://bfexhi5btk2xx"
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_5u6hq")
 metadata/_custom_type_script = "uid://coe4ntekc4ulp"
@@ -133,7 +138,7 @@ blink_half_duration = 0.5
 target_color = Color(0, 1, 0, 0.25882354)
 metadata/_custom_type_script = "uid://b15oivhgowff1"
 
-[node name="DamageBlinkSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("tween_blinker")]
+[node name="HitBlinkSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("tween_blinker")]
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 scale = Vector2(0.191, 0.191)
@@ -141,13 +146,14 @@ texture = ExtResource("6_d4qa6")
 script = ExtResource("8_dnykm")
 tween_blinker = NodePath("TweenBlinker")
 
-[node name="TweenBlinker" type="Node" parent="DamageBlinkSprite"]
+[node name="TweenBlinker" type="Node" parent="HitBlinkSprite"]
 script = ExtResource("9_c5rqy")
 blink_half_duration = 0.2
 target_color = Color(0.16078432, 0.16078432, 0.16078432, 0.21568628)
 metadata/_custom_type_script = "uid://b15oivhgowff1"
 
+[connection signal="damage_received" from="HitBox" to="AddScoreComponent" method="_on_damage_received"]
 [connection signal="damage_received" from="HitBox" to="HealthComponent" method="apply_damage"]
+[connection signal="damage_received" from="HitBox" to="HitBlinkSprite" method="_on_damage_received"]
 [connection signal="area_entered" from="GravityArea2D" to="GravityArea2D" method="_on_area_entered"]
 [connection signal="health_changed" from="HealthComponent" to="HealthBar" method="on_health_changed"]
-[connection signal="health_changed" from="HealthComponent" to="DamageBlinkSprite" method="on_health_changed"]

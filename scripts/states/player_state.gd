@@ -41,7 +41,9 @@ func _is_bit_set(bit : PLAYER_STATE_E) -> bool:
 	return bool(flags & bit)
 
 func _enter_tree() -> void:
+	assert(ProjectGlobals.player_state == null)
 	ProjectGlobals.player_state = self
 	
 func _exit_tree() -> void:
+	assert(ProjectGlobals.player_state == self)
 	ProjectGlobals.player_state = null

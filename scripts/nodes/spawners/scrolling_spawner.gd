@@ -34,4 +34,4 @@ func _spawn_node() -> void:
 		spawned_nodes.erase(node)
 	)
 	spawned_nodes.push_back(node)
-	get_tree().get_root().add_child(node)
+	get_tree().current_scene.add_child(node)

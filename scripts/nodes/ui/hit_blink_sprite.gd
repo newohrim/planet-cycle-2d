@@ -1,4 +1,4 @@
-class_name DamageBlinkSprite
+class_name HitBlinkSprite
 extends Sprite2D
 
 @export
@@ -10,7 +10,7 @@ var initial_color : Color = Color.WHITE
 func _ready() -> void:
 	tween_blinker.initial_color = self.modulate
 
-func on_health_changed(_health : float, delta : float):
-	if delta < 0:
+func _on_damage_received(_from : Node, amount : float):
+	if amount > 0.0:
 		# damage received
 		tween_blinker.blink(self, "modulate")
