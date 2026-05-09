@@ -3,7 +3,9 @@ extends Node
 
 var _score : int = 0
 
-var _best_score : int = 0
+# TODO: move to globals?
+@onready
+var _best_score : int = ProjectGlobals.get_cached_best_score()
 
 signal score_changed(score : int)
 
@@ -22,6 +24,7 @@ func get_best_score() -> int:
 func update_best_score():
 	if _score > _best_score:
 		_best_score = _score
+		ProjectGlobals.save_best_score(_best_score)
 
 func _enter_tree() -> void:
 	assert(ProjectGlobals.player_score == null)
@@ -30,3 +33,4 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	assert(ProjectGlobals.player_score == self)
 	ProjectGlobals.player_score = null
+	
