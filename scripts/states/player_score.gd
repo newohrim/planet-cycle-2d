@@ -1,13 +1,13 @@
 class_name PlayerScore
 extends Node
 
+signal score_changed(score : int)
+
 var _score : int = 0
 
 # TODO: move to globals?
 @onready
 var _best_score : int = ProjectGlobals.get_cached_best_score()
-
-signal score_changed(score : int)
 
 func get_score() -> int:
 	return _score

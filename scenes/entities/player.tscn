@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://be17nt4mpyrg7"]
+[gd_scene load_steps=25 format=3 uid="uid://be17nt4mpyrg7"]
 
 [ext_resource type="Script" uid="uid://cd67m2wea8q23" path="res://scripts/nodes/entities/player.gd" id="1_73kkf"]
 [ext_resource type="Texture2D" uid="uid://yxigl88qou4l" path="res://assets/sprites/planets/Earth.png" id="1_merdl"]
@@ -18,6 +18,9 @@
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="9_c5rqy"]
 [ext_resource type="Script" uid="uid://bfexhi5btk2xx" path="res://scripts/components/add_score_component.gd" id="12_b4o2o"]
 [ext_resource type="Script" uid="uid://df0r7nmfcmjdi" path="res://scripts/components/healer_component.gd" id="13_1yk18"]
+[ext_resource type="Script" uid="uid://coeabmn34xr4i" path="res://scripts/nodes/sound/player_sounds.gd" id="19_jv5ih"]
+[ext_resource type="AudioStream" uid="uid://bfjc8wi74bncg" path="res://assets/sounds/damage.wav" id="19_yr3on"]
+[ext_resource type="AudioStream" uid="uid://cv404nrcbaoxy" path="res://assets/sounds/score_point.wav" id="20_2ngu4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73kkf"]
 animations = [{
@@ -152,8 +155,24 @@ blink_half_duration = 0.2
 target_color = Color(0.16078432, 0.16078432, 0.16078432, 0.21568628)
 metadata/_custom_type_script = "uid://b15oivhgowff1"
 
+[node name="PlayerSounds" type="Node" parent="." node_paths=PackedStringArray("damage_hit_sound", "score_hit_sound")]
+script = ExtResource("19_jv5ih")
+damage_hit_sound = NodePath("DamageHitSound")
+score_hit_sound = NodePath("ScoreHitSound")
+
+[node name="DamageHitSound" type="AudioStreamPlayer" parent="PlayerSounds"]
+stream = ExtResource("19_yr3on")
+max_polyphony = 10
+bus = &"Hits"
+
+[node name="ScoreHitSound" type="AudioStreamPlayer" parent="PlayerSounds"]
+stream = ExtResource("20_2ngu4")
+max_polyphony = 10
+bus = &"Hits"
+
 [connection signal="damage_received" from="HitBox" to="AddScoreComponent" method="_on_damage_received"]
 [connection signal="damage_received" from="HitBox" to="HealthComponent" method="apply_damage"]
 [connection signal="damage_received" from="HitBox" to="HitBlinkSprite" method="_on_damage_received"]
 [connection signal="area_entered" from="GravityArea2D" to="GravityArea2D" method="_on_area_entered"]
 [connection signal="health_changed" from="HealthComponent" to="HealthBar" method="on_health_changed"]
+[connection signal="health_changed" from="HealthComponent" to="PlayerSounds" method="_on_health_changed"]
