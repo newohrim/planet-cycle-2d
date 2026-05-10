@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b00lxgvnqq4to"]
+
+[ext_resource type="Script" uid="uid://c3qqwq0s3n46p" path="res://scripts/nodes/ui/scene_traverse_fade.gd" id="1_qgjib"]
+
+[node name="AutoloadCanvas" type="CanvasLayer" node_paths=PackedStringArray("colorRect")]
+layer = 101
+script = ExtResource("1_qgjib")
+colorRect = NodePath("SceneTraverseFade")
+
+[node name="SceneTraverseFade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

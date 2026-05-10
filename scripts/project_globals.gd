@@ -12,9 +12,26 @@ var player_score : PlayerScore
 
 var _best_score_cached : int = 0
 
+var _is_fading = false
+
 func game_over():
 	player_score.update_best_score()
 	game_over_evt.emit()
+	
+func restart_game():
+	if _is_fading:
+		push_error("failed to restart game while fading")
+		return
+	_is_fading = true
+	SceneTraverseFade.faded_in.connect(
+		func(): get_tree().reload_current_scene(), 
+		CONNECT_ONE_SHOT
+	)
+	SceneTraverseFade.faded_out.connect(
+		func(): _is_fading = false,
+		CONNECT_ONE_SHOT
+	)
+	SceneTraverseFade.start_fade_in()
 	
 func get_cached_best_score() -> int:
 	return _best_score_cached

@@ -18,4 +18,4 @@ func _on_game_over() -> void:
 	anim_player.play("show_game_over_panel")
 	
 func _on_restart_button_clicked() -> void:
-	get_tree().reload_current_scene()
+	ProjectGlobals.restart_game()

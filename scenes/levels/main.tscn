@@ -40,6 +40,7 @@ script = ExtResource("3_2xkjh")
 asteroidRed = ExtResource("4_dj21o")
 
 [node name="ScrollingBackground" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(2000, 1000)
 repeat_times = 3
 
