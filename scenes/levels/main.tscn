@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://br37fox2sv645"]
+[gd_scene load_steps=14 format=3 uid="uid://br37fox2sv645"]
 
 [ext_resource type="Script" uid="uid://c8afur0yoltu5" path="res://scripts/states/player_state.gd" id="1_6ui35"]
 [ext_resource type="PackedScene" uid="uid://be17nt4mpyrg7" path="res://scenes/entities/player.tscn" id="1_b6bv0"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c6wsjvhyo56db" path="res://assets/sprites/background/stars.png" id="3_vkq25"]
 [ext_resource type="Script" uid="uid://csjhj28b877tx" path="res://scripts/states/player_score.gd" id="3_y56qp"]
 [ext_resource type="PackedScene" uid="uid://btp23idwwlh66" path="res://scenes/entities/asteroid_red.tscn" id="4_dj21o"]
-[ext_resource type="Texture2D" uid="uid://jyx3g3vkkqp" path="res://icon.svg" id="5_rssyh"]
 [ext_resource type="PackedScene" uid="uid://p1sro2dj74bq" path="res://scenes/entities/moon_simple.tscn" id="8_vkq25"]
 [ext_resource type="PackedScene" uid="uid://8168qfbfq2o8" path="res://scenes/entities/moon_healing.tscn" id="9_7lrji"]
 [ext_resource type="PackedScene" uid="uid://bxbl7q6215pu" path="res://scenes/entities/moon_horde.tscn" id="10_rssyh"]
@@ -53,10 +52,6 @@ texture = ExtResource("3_vkq25")
 script = ExtResource("2_ubwgw")
 move_speed = 1.5
 max_distance_pix_h = 200.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(217, 3)
-texture = ExtResource("5_rssyh")
 
 [node name="Moon" parent="." instance=ExtResource("8_vkq25")]
 position = Vector2(-399, -157)
