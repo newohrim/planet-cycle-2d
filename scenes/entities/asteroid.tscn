@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc5fu62hds7dd"]
+[gd_scene load_steps=8 format=3 uid="uid://dc5fu62hds7dd"]
 
 [ext_resource type="Script" uid="uid://b5cu5u71hi6k5" path="res://scripts/nodes/entities/asteroid.gd" id="1_wgiuj"]
 [ext_resource type="Texture2D" uid="uid://oo6bdn15rjtd" path="res://assets/sprites/asteroids/asteroid.png" id="1_xwv53"]
+[ext_resource type="PackedScene" uid="uid://c2ntxmjhbntms" path="res://scenes/particles/asteroid_explosion_particle.tscn" id="2_tpfnd"]
 [ext_resource type="Script" uid="uid://df23874jukw0m" path="res://scripts/components/constant_move_component.gd" id="3_5mhnt"]
 [ext_resource type="Script" uid="uid://c35xsrridonjj" path="res://scripts/components/deal_damage_component.gd" id="4_n6hoc"]
 [ext_resource type="Script" uid="uid://daodgxcsusx6e" path="res://scripts/components/add_power_component.gd" id="4_tpfnd"]
@@ -11,11 +12,17 @@ radius = 7.0
 
 [node name="Asteroid" type="Node2D"]
 script = ExtResource("1_wgiuj")
+particle_on_hit = ExtResource("2_tpfnd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0.3647059, 1)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_xwv53")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Sprite2D"]
+unique_name_in_owner = true
+position = Vector2(-140, -140)
+rect = Rect2(-20, -20, 319.99997, 319.99997)
 
 [node name="AsteroidArea" type="Area2D" parent="."]
 unique_name_in_owner = true
