@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b61p68o1ltjth"]
+[gd_scene load_steps=16 format=3 uid="uid://b61p68o1ltjth"]
 
 [ext_resource type="Script" uid="uid://f2xmdvslulbp" path="res://scripts/nodes/entities/moon_base.gd" id="1_eftg1"]
 [ext_resource type="Texture2D" uid="uid://uq0m5yq34qv2" path="res://assets/sprites/moons/Moon1.png" id="2_g81up"]
 [ext_resource type="Texture2D" uid="uid://dthh6jd5065r7" path="res://assets/sprites/ui/bonusCounter.png" id="3_2tn4r"]
+[ext_resource type="Script" uid="uid://dqpj1x0dyqt4e" path="res://scripts/nodes/visuals/trail_2d.gd" id="3_j8xmb"]
 [ext_resource type="Texture2D" uid="uid://bi4fuaxag0pv0" path="res://assets/sprites/ui/bonusCounterMask.png" id="4_5ngu6"]
 [ext_resource type="Script" uid="uid://bonqmajce3op0" path="res://scripts/nodes/ui/power_counter_bar.gd" id="5_tueem"]
 [ext_resource type="Script" uid="uid://b15oivhgowff1" path="res://scripts/nodes/misc/tween_blinker.gd" id="6_rkgqo"]
@@ -11,6 +12,14 @@
 [ext_resource type="Script" uid="uid://cilxnmihkq60e" path="res://scripts/components/power_component.gd" id="10_eftg1"]
 [ext_resource type="Script" uid="uid://bvtd5mjvjwc4" path="res://scripts/bonuses/bonus_provider.gd" id="10_up2om"]
 [ext_resource type="Script" uid="uid://bcw0wxwfbp4eq" path="res://scripts/components/destroy_when_far_away.gd" id="12_xjrq8"]
+
+[sub_resource type="Curve" id="Curve_j8xmb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_j8xmb"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+metadata/_snap_enabled = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b0kkn"]
 radius = 34.782757
@@ -21,6 +30,16 @@ script = ExtResource("1_eftg1")
 [node name="PlanetSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.13, 0.13)
 texture = ExtResource("2_g81up")
+
+[node name="Trail2D" type="Line2D" parent="."]
+process_mode = 4
+show_behind_parent = true
+z_index = -1
+z_as_relative = false
+width_curve = SubResource("Curve_j8xmb")
+gradient = SubResource("Gradient_j8xmb")
+script = ExtResource("3_j8xmb")
+length = 50
 
 [node name="PowerCounterNode" type="Node2D" parent="."]
 scale = Vector2(0.08, 0.08)
@@ -81,4 +100,5 @@ script = ExtResource("12_xjrq8")
 
 [connection signal="area_entered" from="MoonArea" to="MoveComponent" method="_on_area_entered"]
 [connection signal="power_received" from="MoonArea" to="PowerComponent" method="add_power_from_node"]
+[connection signal="orbit_begin" from="MoveComponent" to="Trail2D" method="set_active"]
 [connection signal="power_received" from="PowerComponent" to="PowerCounterNode/PowerCounterBar" method="_on_power_received"]

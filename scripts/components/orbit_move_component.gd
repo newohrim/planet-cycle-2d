@@ -1,6 +1,8 @@
 class_name OrbitMoveComponent
 extends Node
 
+signal orbit_begin()
+
 @export
 var target : Node2D
 
@@ -21,6 +23,7 @@ func _on_area_entered(area : Area2D) -> void:
 func begin_orbit(_target : Node2D, _radius : float) -> void:
 	target = _target
 	radius = _radius
+	orbit_begin.emit()
 	set_process(true)
 
 func _ready() -> void:
