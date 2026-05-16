@@ -84,7 +84,6 @@ script = ExtResource("3_e4p34")
 orbit_radius = 100.0
 
 [node name="GravityShape2D" type="CollisionShape2D" parent="GravityArea2D"]
-visible = false
 shape = SubResource("CircleShape2D_rfe5m")
 debug_color = Color(0.57679063, 0.5517666, 0.12584257, 0.41960785)
 
