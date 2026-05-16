@@ -25,6 +25,8 @@ var cur_angle : float = 0.0  # in radians
 var radius : float
 
 func _on_area_entered(area : Area2D) -> void:
+	if target:
+		return  # already orbited
 	if area is GravityArea2D:
 		var free_idx = area.find_free_slot()
 		if free_idx < 0:
