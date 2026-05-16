@@ -53,6 +53,9 @@ script = ExtResource("2_ubwgw")
 move_speed = 1.5
 max_distance_pix_h = 200.0
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Player/Camera2D"]
+current = true
+
 [node name="Moon" parent="." instance=ExtResource("8_vkq25")]
 position = Vector2(-399, -157)
 
