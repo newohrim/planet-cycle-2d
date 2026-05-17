@@ -19,8 +19,8 @@
 [ext_resource type="Script" uid="uid://bfexhi5btk2xx" path="res://scripts/components/add_score_component.gd" id="12_b4o2o"]
 [ext_resource type="Script" uid="uid://df0r7nmfcmjdi" path="res://scripts/components/healer_component.gd" id="13_1yk18"]
 [ext_resource type="Script" uid="uid://coeabmn34xr4i" path="res://scripts/nodes/sound/player_sounds.gd" id="19_jv5ih"]
-[ext_resource type="AudioStream" uid="uid://bfjc8wi74bncg" path="res://assets/sounds/damage.wav" id="19_yr3on"]
-[ext_resource type="AudioStream" uid="uid://cv404nrcbaoxy" path="res://assets/sounds/score_point.wav" id="20_2ngu4"]
+[ext_resource type="AudioStream" uid="uid://bfjc8wi74bncg" path="res://assets/sounds/sfx/damage.wav" id="19_yr3on"]
+[ext_resource type="AudioStream" uid="uid://cv404nrcbaoxy" path="res://assets/sounds/sfx/score_point.wav" id="20_2ngu4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73kkf"]
 animations = [{

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjk2xh78tj6f2"]
+
+[ext_resource type="AudioStream" uid="uid://dc6rh4n0rca2o" path="res://assets/sounds/music/Lord_Of_The_Dawn.mp3" id="1_t06ly"]
+[ext_resource type="AudioStream" uid="uid://td7gpvdmt8rf" path="res://assets/sounds/music/Spenta_Mainyu.mp3" id="2_h7423"]
+[ext_resource type="AudioStream" uid="uid://0vgknnvreb84" path="res://assets/sounds/music/The_Sleeping_Prophet.mp3" id="3_xkup8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cwruh"]
+streams_count = 3
+stream_0/stream = ExtResource("1_t06ly")
+stream_1/stream = ExtResource("2_h7423")
+stream_2/stream = ExtResource("3_xkup8")
+
+[node name="MusicAudioStream" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamRandomizer_cwruh")
+autoplay = true
+bus = &"Music"

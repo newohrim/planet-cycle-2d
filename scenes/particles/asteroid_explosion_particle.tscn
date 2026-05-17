@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2ntxmjhbntms"]
 
-[ext_resource type="AudioStream" uid="uid://yi5s05r3md6g" path="res://assets/sounds/asteroid_explosion.wav" id="1_rqy3x"]
+[ext_resource type="AudioStream" uid="uid://yi5s05r3md6g" path="res://assets/sounds/sfx/asteroid_explosion.wav" id="1_rqy3x"]
 
 [sub_resource type="Curve" id="Curve_lnnkv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15526316, 1), 0.0, 0.0, 0, 0, Vector2(0.6552632, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
