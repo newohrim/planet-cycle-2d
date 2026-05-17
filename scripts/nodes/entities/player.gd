@@ -1,11 +1,12 @@
 class_name Player
 extends Node2D
 
-@onready
-var gravity_area : GravityArea2D = %GravityArea2D
+var gravity_area: GravityArea2D:
+	get:
+		return %GravityArea2D
 
 @onready
-var bonuses_holder : BonusesHolder = %BonusesHolder
+var _bonuses_holder : BonusesHolder = %BonusesHolder
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Consume"):
@@ -17,5 +18,5 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			var moon = body as MoonBase
 			if moon.is_powered():
 				var bonus = moon.extract_bonus()
-				bonuses_holder.add_bonus(bonus)  # activates bonus
+				_bonuses_holder.add_bonus(bonus)  # activates bonus
 			body.queue_free()

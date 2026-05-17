@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://df2h24wkr5sg8"]
+[gd_scene load_steps=15 format=3 uid="uid://df2h24wkr5sg8"]
 
 [ext_resource type="FontFile" uid="uid://cygy3jq60aafl" path="res://assets/fonts/a_lcdnovaobl_[allfont.ru].ttf" id="1_hnesk"]
 [ext_resource type="Script" uid="uid://blj6ji8tejoq8" path="res://scripts/nodes/ui/player_score_label.gd" id="2_hcnxy"]
 [ext_resource type="Script" uid="uid://5i5uyee6fmt5" path="res://scripts/nodes/ui/game_over_panel.gd" id="3_46cp5"]
 [ext_resource type="LabelSettings" uid="uid://crahimovqd0ic" path="res://assets/fonts/default_label_settings.tres" id="3_l8t6x"]
 [ext_resource type="FontFile" uid="uid://uhgx80hqom86" path="res://assets/fonts/BebasNeue Bold.otf" id="4_travt"]
+[ext_resource type="Script" uid="uid://bxs5ro8u7fmhn" path="res://scripts/nodes/ui/controls_consume_hint.gd" id="6_b1beo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hcnxy"]
 font = ExtResource("1_hnesk")
@@ -73,6 +74,22 @@ _data = {
 &"RESET": SubResource("Animation_46cp5"),
 &"show_game_over_panel": SubResource("Animation_travt")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0li6"]
+font = ExtResource("4_travt")
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxwcw"]
+bg_color = Color(0.8047426, 0.80474263, 0.8047425, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_yc0ux"]
+font = ExtResource("4_travt")
+font_size = 24
+font_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -175,5 +192,43 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_travt")
 theme_override_font_sizes/font_size = 48
 text = "Restart"
+
+[node name="ControlsHintMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -266.0
+offset_top = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ConsumeHint" type="HBoxContainer" parent="ControlsHintMargin"]
+layout_mode = 2
+script = ExtResource("6_b1beo")
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlsHintMargin/ConsumeHint"]
+layout_mode = 2
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="Label" parent="ControlsHintMargin/ConsumeHint/MarginContainer"]
+layout_mode = 2
+text = "Consume moons"
+label_settings = SubResource("LabelSettings_t0li6")
+
+[node name="PanelContainer" type="PanelContainer" parent="ControlsHintMargin/ConsumeHint"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oxwcw")
+
+[node name="Label" type="Label" parent="ControlsHintMargin/ConsumeHint/PanelContainer"]
+layout_mode = 2
+text = "SPACE"
+label_settings = SubResource("LabelSettings_yc0ux")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="GameOverPanel/MarginContainer/vBoxTable/MarginContainer/Button" to="GameOverPanel" method="_on_restart_button_clicked"]

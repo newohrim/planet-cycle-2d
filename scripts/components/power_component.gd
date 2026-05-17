@@ -2,6 +2,7 @@ class_name PowerComponent
 extends Node
 
 signal power_received(power : float, delta : float)
+signal powered_up_max()
 
 const MAX_POWER_VALUE : float = 100.0
 
@@ -19,3 +20,5 @@ func add_power(amount : float) -> void:
 		return
 	power = new_power
 	power_received.emit(power, amount)
+	if power == MAX_POWER_VALUE:
+		powered_up_max.emit()

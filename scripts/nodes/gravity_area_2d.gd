@@ -1,6 +1,9 @@
 class_name GravityArea2D
 extends Area2D
 
+signal body_added(body : Node2D)
+signal body_removed(body : Node2D)
+
 @export var max_bodies_on_orbit : int = 3
 @export var orbit_radius: float = 5.0
 
@@ -17,9 +20,11 @@ func make_orbit(body : Node2D, idx : int) -> float:
 	
 	orbited_bodies[idx] = body
 	body.tree_exiting.connect(_remove_from_orbit.bind(body))
+	body_added.emit(body)
 	return orbit_radius * (idx + 1)
 
 func _remove_from_orbit(body: Node2D) -> void:
 	var idx = orbited_bodies.find(body)
 	if idx >= 0:
 		orbited_bodies[idx] = null
+		body_removed.emit(body)
